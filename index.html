@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Watch TypeSafe Jev pursue a hidden concept in real time as clues reshape a field of possibilities."
+    />
+    <meta name="theme-color" content="#07080b" />
+    <title>Semantic Pursuit · Powered by Jev</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Semantic Pursuit home">
+          <span class="brand-mark" aria-hidden="true"><i></i></span>
+          <span>Semantic Pursuit</span>
+        </a>
+        <div class="live-strip" role="group" aria-label="Live Jev telemetry">
+          <div class="telemetry"><span>Latency</span><b id="latency">—</b></div>
+          <div class="telemetry"><span>Jev calls</span><b id="call-count">0</b></div>
+          <div class="telemetry"><span>Input</span><b id="token-count">0 tok</b></div>
+          <div class="telemetry"><span>Cost</span><b id="cost-count">$0.000000</b></div>
+          <div class="engine-pill" id="engine-pill">
+            <span class="status-light" aria-hidden="true"></span>
+            <span id="engine-label">Checking Jev</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="pursuit-shell">
+        <aside class="clue-panel" aria-labelledby="clue-heading">
+          <div class="eyebrow">Real-time semantic inference</div>
+          <h1 id="clue-heading">Leave clues.<br /><em>Watch Jev hunt.</em></h1>
+          <p class="lede">
+            Choose a secret concept. Jev never sees your answer, only the clues
+            you reveal. Watch 64 possibilities move in real time.
+          </p>
+
+          <div class="target-vault">
+            <span class="section-label">Your secret · browser only</span>
+            <button id="target-button" type="button">
+              <span class="target-glyph" id="target-glyph">?</span>
+              <span>
+                <small>Hidden from Jev</small>
+                <strong id="target-label">Choose a target</strong>
+              </span>
+              <span class="change-label">Change</span>
+            </button>
+          </div>
+
+          <div class="clue-stream">
+            <div class="stream-head">
+              <span class="section-label">Clue stream</span>
+              <button id="clear-button" type="button">Clear</button>
+            </div>
+            <ol id="clue-list" aria-live="polite">
+              <li class="empty-clue">No clues yet. Be indirect.</li>
+            </ol>
+          </div>
+
+          <form id="clue-form" class="clue-form">
+            <label for="clue-input">Transmit a clue</label>
+            <div class="clue-input-wrap">
+              <textarea
+                id="clue-input"
+                rows="2"
+                maxlength="180"
+                placeholder="It can die, but it isn't an animal…"
+                disabled
+              ></textarea>
+              <button id="send-button" type="submit" disabled aria-label="Send clue">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+            <p>Jev updates while you type · Enter to commit · Shift+Enter for a new line</p>
+          </form>
+
+          <div class="round-actions">
+            <button id="new-round-button" class="primary-button" type="button">New pursuit</button>
+            <button id="autoplay-button" class="secondary-button" type="button">Replay demo</button>
+            <button id="reveal-button" class="secondary-button" type="button" disabled>Reveal result</button>
+          </div>
+
+          <div id="result-card" class="result-card" hidden>
+            <span class="section-label">The reveal</span>
+            <strong id="result-title"></strong>
+            <p id="result-copy"></p>
+            <div id="turning-points" class="turning-points"></div>
+          </div>
+        </aside>
+
+        <section class="race-panel" aria-labelledby="race-heading">
+          <div class="race-head">
+            <div>
+              <span class="section-label">Probability field · 64 candidates</span>
+              <h2 id="race-heading">Every clue moves the field.</h2>
+            </div>
+            <div class="mode-badge" id="mode-badge">Recorded Jev run</div>
+          </div>
+
+          <div class="race-stage">
+            <div class="axis" aria-hidden="true">
+              <span>Long shot</span><span>Plausible</span><span>Front runner</span>
+            </div>
+            <div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div id="race-field" class="race-field" role="list" aria-label="Candidate probability race"></div>
+            <div class="leader-card">
+              <span>Jev's current pick</span>
+              <div>
+                <i id="leader-glyph">—</i>
+                <strong id="leader-label">Waiting for a clue</strong>
+                <b id="leader-probability">—</b>
+              </div>
+              <div class="confidence-line">
+                <span>Choice confidence</span>
+                <div><i id="confidence-bar"></i></div>
+                <b id="confidence-value">—</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="rank-strip">
+            <span class="section-label">Top contenders</span>
+            <div id="rank-list" class="rank-list"></div>
+          </div>
+        </section>
+
+        <aside class="evidence-panel" aria-labelledby="evidence-heading">
+          <div class="evidence-head">
+            <div>
+              <span class="section-label">Jev's live read</span>
+              <h2 id="evidence-heading">Typed evidence</h2>
+            </div>
+            <span id="model-label">jev-latest</span>
+          </div>
+
+          <section class="distribution-card">
+            <div class="card-head">
+              <h3>Candidate distribution</h3>
+              <span id="cache-label"></span>
+            </div>
+            <div id="distribution-list" class="distribution-list">
+              <p class="empty-state">Probabilities appear with the first clue.</p>
+            </div>
+          </section>
+
+          <section class="signal-card">
+            <div class="card-head">
+              <h3>Parallel judgments</h3>
+              <span>8 Nouls · same request</span>
+            </div>
+            <div id="signal-grid" class="signal-grid"></div>
+          </section>
+
+          <section class="verdict-card">
+            <div class="verdict">
+              <span>Evidence sufficient</span>
+              <strong id="sufficiency-value">—</strong>
+              <div class="mini-track"><i id="sufficiency-bar"></i></div>
+            </div>
+            <div class="verdict">
+              <span>Clues contradict</span>
+              <strong id="contradiction-value">—</strong>
+              <div class="mini-track danger"><i id="contradiction-bar"></i></div>
+            </div>
+          </section>
+
+          <div class="proof-note">
+            <span class="proof-icon">↯</span>
+            <p>
+              <strong>No generated explanation.</strong> Every movement comes
+              directly from typed choices, scores, and probabilities.
+            </p>
+          </div>
+        </aside>
+      </main>
+
+      <dialog id="target-dialog" class="target-dialog">
+        <form method="dialog">
+          <div class="dialog-head">
+            <div>
+              <span class="section-label">Pick something you can describe</span>
+              <h2>Choose the hidden truth</h2>
+            </div>
+            <button value="cancel" aria-label="Close target picker">×</button>
+          </div>
+          <div id="target-grid" class="target-grid"></div>
+          <p class="privacy-note">
+            Your selection stays in this browser. Network requests contain only your clues.
+          </p>
+        </form>
+      </dialog>
+
+      <div class="blocking-state" id="blocking-state" hidden>
+        <div>
+          <span class="status-light"></span>
+          <h2>Jev needs an API key</h2>
+          <p>Add <code>TYPESAFE_API_KEY</code> to <code>.env</code>, then restart the server.</p>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" role="status"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
